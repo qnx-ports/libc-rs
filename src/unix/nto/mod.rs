@@ -2240,6 +2240,11 @@ pub const POSIX_MADV_NORMAL: c_int = 0;
 pub const POSIX_MADV_RANDOM: c_int = 2;
 pub const POSIX_MADV_SEQUENTIAL: c_int = 1;
 pub const POSIX_MADV_WILLNEED: c_int = 3;
+pub const MADV_DONTNEED: c_int = 4;
+pub const MADV_NORMAL: c_int = 0;
+pub const MADV_RANDOM: c_int = 2;
+pub const MADV_SEQUENTIAL: c_int = 1;
+pub const MADV_WILLNEED: c_int = 3;
 pub const _POSIX_VDISABLE: c_int = 0;
 pub const P_PGID: idtype_t = 2;
 pub const P_PID: idtype_t = 1;
@@ -2750,6 +2755,7 @@ extern "C" {
     pub fn globfree(pglob: *mut crate::glob_t);
 
     pub fn posix_madvise(addr: *mut c_void, len: size_t, advice: c_int) -> c_int;
+    pub fn madvise(addr: *mut c_void, len: size_t, advice: c_int) -> c_int;
 
     pub fn shm_unlink(name: *const c_char) -> c_int;
 
