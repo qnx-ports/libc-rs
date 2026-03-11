@@ -109,9 +109,23 @@ s! {
         pub imr_interface: in_addr,
     }
 
-    #[cfg_attr(any(target_env = "nto71", target_env = "nto70"), repr(packed))]
+    #[cfg(not(any(target_env = "nto71", target_env = "nto70")))]
+    pub struct ip_mreqn {
+        pub imr_multiaddr: in_addr,
+        pub imr_address: in_addr,
+        pub imr_ifindex: c_int,
+    }
+
+    #[repr(packed)]
     pub struct in_addr {
         pub s_addr: crate::in_addr_t,
+    }
+
+    #[cfg(not(any(target_env = "nto71", target_env = "nto70")))]
+    pub struct ip_mreq_source {
+        pub imr_multiaddr: in_addr,
+        pub imr_sourceaddr: in_addr,
+        pub imr_interface: in_addr,
     }
 
     pub struct sockaddr {
@@ -1000,6 +1014,10 @@ cfg_if! {
         pub const pseudo_AF_HDRCMPLT: c_int = 31;
         pub const SIOCGIFADDR: c_int = 0xc0206921;
         pub const SO_SETFIB: c_int = 0x1014;
+        pub const TCP_KEEPIDLE: c_int = 256;
+        pub const TCP_KEEPINTVL: c_int = 512;
+        pub const TCP_KEEPCNT: c_int = 1024;
+        pub const IP_RECVTOS: c_int = 68;
     }
 }
 
@@ -1063,6 +1081,8 @@ pub const IP_MULTICAST_TTL: c_int = 10;
 pub const IP_MULTICAST_LOOP: c_int = 11;
 pub const IP_ADD_MEMBERSHIP: c_int = 12;
 pub const IP_DROP_MEMBERSHIP: c_int = 13;
+pub const IP_ADD_SOURCE_MEMBERSHIP: c_int = 70;
+pub const IP_DROP_SOURCE_MEMBERSHIP: c_int = 71;
 pub const IP_DEFAULT_MULTICAST_TTL: c_int = 1;
 pub const IP_DEFAULT_MULTICAST_LOOP: c_int = 1;
 
