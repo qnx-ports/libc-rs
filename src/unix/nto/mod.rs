@@ -2752,6 +2752,8 @@ extern "C" {
     pub fn ftok(pathname: *const c_char, proj_id: c_int) -> crate::key_t;
     pub fn mprotect(addr: *mut c_void, len: size_t, prot: c_int) -> c_int;
 
+    pub fn pipe2(fds: *mut c_int, flags: c_int) -> c_int;
+
     pub fn posix_fallocate(fd: c_int, offset: off_t, len: off_t) -> c_int;
     pub fn mkostemp(template: *mut c_char, flags: c_int) -> c_int;
     pub fn mkostemps(template: *mut c_char, suffixlen: c_int, flags: c_int) -> c_int;
