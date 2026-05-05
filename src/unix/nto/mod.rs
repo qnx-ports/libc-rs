@@ -1631,6 +1631,8 @@ pub const _PC_ALLOC_SIZE_MIN: c_int = 21;
 pub const _PC_SYMLINK_MAX: c_int = 17;
 pub const _PC_2_SYMLINKS: c_int = 20;
 
+pub const _CS_PATH: c_int = 1;
+
 pub const _SC_PAGE_SIZE: c_int = _SC_PAGESIZE;
 pub const _SC_ARG_MAX: c_int = 1;
 pub const _SC_CHILD_MAX: c_int = 2;
