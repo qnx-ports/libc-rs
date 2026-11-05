@@ -125,6 +125,11 @@ s! {
         pub st_ctim: crate::timespec,
     }
 
+    pub struct itimerspec {
+        pub it_interval: crate::timespec,
+        pub it_value: crate::timespec,
+    }
+
     pub struct ip_mreq {
         pub imr_multiaddr: in_addr,
         pub imr_interface: in_addr,
@@ -3175,6 +3180,17 @@ extern "C" {
     // Function on the stack after a call to pthread_create().  This is used
     // as a sentinel to work around an infitnite loop in the unwinding code.
     pub fn __my_thread_exit(value_ptr: *mut *const c_void);
+
+    pub fn timer_create(clock_id: clockid_t, evp: *mut sigevent, timerid: *mut timer_t) -> c_int;
+    pub fn timer_delete(timerid: timer_t) -> c_int;
+    pub fn timer_getoverrun(timerid: timer_t) -> c_int;
+    pub fn timer_gettime(timerid: timer_t, value: *mut itimerspec) -> c_int;
+    pub fn timer_settime(
+        timerid: timer_t,
+        flags: c_int,
+        value: *const itimerspec,
+        ovalue: *mut itimerspec,
+    ) -> c_int;
 }
 
 // Models the implementation in stdlib.h.  Ctest will fail if trying to use the
